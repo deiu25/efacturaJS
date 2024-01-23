@@ -1,7 +1,7 @@
 document.getElementById('invoiceForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    const accessToken = '37cc6b97e3c721de7b67eb599e6db2134879e0df89e77074d041164c11563dc3';
+    const accessToken = '';
     const invoiceFile = document.getElementById('invoiceFile').files[0];
 
     if (invoiceFile && invoiceFile.type === 'text/xml') {
