@@ -1,7 +1,7 @@
 document.getElementById('invoiceForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    const accessToken = '';
+    const accessToken = '37cc6b97e3c721de7b67eb599e6db2134879e0df89e77074d041164c11563dc3';
     const invoiceFile = document.getElementById('invoiceFile').files[0];
 
     if (invoiceFile && invoiceFile.type === 'text/xml') {
@@ -24,6 +24,14 @@ document.getElementById('invoiceForm').addEventListener('submit', async function
 
                 const xmlText = await response.text();
                 console.log('Răspuns XML primit:', xmlText);
+
+                // Extragere index de încărcare din răspunsul XML
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                const uploadIndex = xmlDoc.getElementsByTagName("header")[0].getAttribute("index_incarcare");
+
+                // Actualizare DOM pentru a afișa indexul de încărcare
+                document.getElementById('uploadIndex').textContent = `Index de încărcare: ${uploadIndex}`;
             };
             reader.onerror = function(error) {
                 console.error('Eroare la citirea fișierului XML:', error);
